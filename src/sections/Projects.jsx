@@ -163,7 +163,7 @@ export default function Projects() {
             title: "ResQ",
             description: "ResQ is a mobile application that is useful for helping users in emergencies such as earthquakes, accidents, fires, etc. ",
             image: "/img/projectProfile/resq.png",
-            tags: ["HTML", "CSS", "JavaScript"],
+            tags: ["Dart", "Flutter", "Firebase"],
             liveUrl: "https://www.youtube.com/watch?v=9iF7tE6tk98",
             githubUrl: "https://github.com/JonathanLawrencio/ResQ",
             showLiveDemo: true,

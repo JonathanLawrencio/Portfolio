@@ -91,7 +91,7 @@ export default function About() {
 
                             <div className="relative rounded-2xl overflow-hidden glass p-1.5">
                                 <img
-                                    src="/img/almet.jpeg"
+                                    src="/img/selfie.png"
                                     alt="About Me"
                                     className="w-full max-w-md aspect-[4/5] object-cover rounded-xl transition-transform duration-700 group-hover:scale-[1.02]"
                                 />

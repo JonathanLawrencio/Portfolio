@@ -56,7 +56,7 @@ export default function About() {
     }, []);
 
     const stats = [
-        { value: 1, suffix: "+", label: "Year Experience" },
+        { value: 1, suffix: "", label: "Year Experience" },
         { value: 10, suffix: "+", label: "Projects Completed" },
     ];
 

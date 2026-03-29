@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ExternalLink, Github, Sparkles } from "lucide-react";
+import { ExternalLink, Github, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
 
 // --- Project Card ---
 function ProjectCard({ project, index, isVisible }) {
@@ -7,19 +7,16 @@ function ProjectCard({ project, index, isVisible }) {
 
     return (
         <div
-            // ADDED: md:h-[320px] to strictly limit the height on desktop
             className={`group relative grid md:grid-cols-2 gap-0 rounded-2xl overflow-hidden glass glow-border-hover transition-all duration-500 hover:scale-[1.01] md:h-[380px] ${
                 isVisible ? 'animate-fade-up' : 'opacity-0'
             }`}
             style={{ animationDelay: `${200 + index * 150}ms` }}
         >
             {/* Image Side */}
-            {/* ADDED: h-56 md:h-full to the wrapper so it behaves perfectly on both mobile and desktop */}
             <div className={`relative overflow-hidden h-56 md:h-full ${isEven ? '' : 'md:order-2'}`}>
                 <img
                     src={project.image}
                     alt={project.title}
-                    // CHANGED: Simply w-full h-full object-cover so it fits the restricted container
                     className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-${isEven ? 'r' : 'l'} from-transparent via-transparent to-background/60 hidden md:block pointer-events-none`} />
@@ -27,7 +24,6 @@ function ProjectCard({ project, index, isVisible }) {
             </div>
 
             {/* Content Side */}
-            {/* Content naturally centers vertically because of flex flex-col justify-center */}
             <div className={`relative p-6 md:p-8 flex flex-col justify-center space-y-3 ${isEven ? '' : 'md:order-1'}`}>
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2">
@@ -45,7 +41,6 @@ function ProjectCard({ project, index, isVisible }) {
                     {project.title}
                 </h3>
 
-                {/* Kept line-clamp to ensure long text doesn't break the new fixed height */}
                 <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 md:line-clamp-3">
                     {project.description}
                 </p>
@@ -84,6 +79,7 @@ function ProjectCard({ project, index, isVisible }) {
 export default function Projects() {
     const sectionRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
+    const [showAll, setShowAll] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -105,7 +101,7 @@ export default function Projects() {
     const projects = [
         {
             title: "PawsLife",
-            description: "A platform that is designed using a human-centered design approach to replace the inefficient conventional animal adoption process.",
+            description: "A platform that is built to replace the inefficient conventional animal adoption process.",
             image: "/img/projectProfile/pawslife.png",
             tags: ["Laravel", "PHP", "MySQL"],
             liveUrl: "https://pawslife.my.id/",
@@ -129,7 +125,47 @@ export default function Projects() {
             image: "/img/projectProfile/portfolio.png",
             tags: ["React", "Vite", "Tailwind"],
             liveUrl: "#",
-            githubUrl: "#",
+            githubUrl: "https://github.com/JonathanLawrencio/Portfolio",
+            showLiveDemo: true,
+            showSource: true,
+        },
+        {
+            title: "Edufun",
+            description: "Edufun is a website that provides free knowledge for students related to courses in the IT field.",
+            image: "/img/projectProfile/edufun.png",
+            tags: ["Laravel", "Bootstrap"],
+            liveUrl: "https://www.canva.com/design/DAGY6NsZdtk/a6TE65Bw_v5PWLZhR7aXLQ/view?utm_content=DAGY6NsZdtk&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hcef35f8d20",
+            githubUrl: "https://github.com/JonathanLawrencio/EduFun",
+            showLiveDemo: true,
+            showSource: true,
+        },
+        {
+            title: "ERamen",
+            description: "ERamen is a website that is useful for displaying the menu of a ramen restaurant.",
+            image: "/img/projectProfile/eramen.png",
+            tags: ["HTML", "CSS", "JavaScript"],
+            liveUrl: "https://jonathanlawrencio.github.io/ERamen/",
+            githubUrl: "https://github.com/JonathanLawrencio/ERamen",
+            showLiveDemo: true,
+            showSource: true,
+        },
+        {
+            title: "Allergy Diary",
+            description: "Allergy DIary is a mobile app that helps people who have food allergies. This application has several features such as scanning food ingredients, buying medicine, consulting with doctors, etc.",
+            image: "/img/projectProfile/allergy-diary.png",
+            tags: ["Dart", "Flutter"],
+            liveUrl: "https://binusianorg-my.sharepoint.com/personal/dwi_khaerakinanti_binus_ac_id/_layouts/15/stream.aspx?id=%2Fpersonal%2Fdwi_khaerakinanti_binus_ac_id%2FDocuments%2FVideo+Demo+Allergy+Diary.mov&ga=1&referrer=StreamWebApp.Web&referrerScenario=AddressBarCopied.view.03926dc3-936f-43ff-a646-b33ab40019c3&startedResponseCatch=true",
+            githubUrl: "https://github.com/JonathanLawrencio/Allergy-Diary",
+            showLiveDemo: true,
+            showSource: true,
+        },
+        {
+            title: "ResQ",
+            description: "ResQ is a mobile application that is useful for helping users in emergencies such as earthquakes, accidents, fires, etc. ",
+            image: "/img/projectProfile/resq.png",
+            tags: ["HTML", "CSS", "JavaScript"],
+            liveUrl: "https://www.youtube.com/watch?v=9iF7tE6tk98",
+            githubUrl: "https://github.com/JonathanLawrencio/ResQ",
             showLiveDemo: true,
             showSource: true,
         },
@@ -155,7 +191,7 @@ export default function Projects() {
 
                 {/* Project Cards */}
                 <div className="space-y-8">
-                    {projects.map((project, idx) => (
+                    {(showAll ? projects : projects.slice(0, 3)).map((project, idx) => (
                         <ProjectCard
                             key={idx}
                             project={project}
@@ -164,6 +200,22 @@ export default function Projects() {
                         />
                     ))}
                 </div>
+
+                {/* Show More / Show Less Button */}
+                {projects.length > 3 && (
+                    <div className={`flex justify-center mt-12 transition-none ${isVisible ? 'animate-fade-up animation-delay-600' : 'opacity-0'}`}>
+                        <button
+                            onClick={() => setShowAll(!showAll)}
+                            className="group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-medium rounded-full border border-white/20 text-white hover:bg-white/10 hover:border-white/40 transition-all duration-300"
+                        >
+                            {showAll ? 'Show Less' : 'Show More'}
+                            {showAll 
+                                ? <ChevronUp className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+                                : <ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
+                            }
+                        </button>
+                    </div>
+                )}
             </div>
         </section>
     );

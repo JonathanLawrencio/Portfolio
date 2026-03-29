@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 const navLinks = [
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#testimonial", label: "Testimonial" },
+    { href: "#certificate", label: "Certificate" },
 ];
 
 export default function Navbar() {
@@ -16,7 +15,6 @@ export default function Navbar() {
     // Track scroll position to trigger blur effect
     useEffect(() => {
         const handleScroll = () => {
-            // Trigger transition after 50px of scrolling for a cleaner feel
             setIsScrolled(window.scrollY > 50);
         };
 
@@ -46,7 +44,7 @@ export default function Navbar() {
             }`}
         >
             <nav className="container mx-auto px-6 lg:px-18 flex items-center justify-between">
-                {/* Logo / Name */}
+                {/* Name */}
                 <a 
                     href="#" 
                     className={`font-bold tracking-tight text-white transition-all duration-500 ${
